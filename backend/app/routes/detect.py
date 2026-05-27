@@ -34,25 +34,45 @@ def analyze_job(job: JobInput):
         "daily earnings": 20,
         "no interview": 25,
         "submit payment": 30,
-        "verification fee": 30
+        "verification fee": 30,
+        "quick money": 25,
+        "easy money": 25,
+        "click and earn": 25,
+        "salary upfront": 25,
+        "bank details": 20,
+        "otp": 20,
+        "free training": 15,
+        "earn daily": 20,
+        "investment required": 30
     }
 
     score = 0
     found_keywords = []
 
     for keyword, points in suspicious_keywords.items():
+
         if keyword in text:
+
             score += points
             found_keywords.append(keyword)
 
+    # Suspicious salary claims
     if "₹" in text or "lakh" in text:
         score += 15
 
+    if "earn" in text and "daily" in text:
+        score += 20
+
+    # Limit score
+    score = min(score, 100)
+
+    # Prediction logic
     if score >= 40:
         prediction = "Fake"
     else:
         prediction = "Real"
 
+    # Confidence logic
     confidence = min(score + 40, 99)
 
     db: Session = SessionLocal()
