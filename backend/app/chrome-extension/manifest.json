@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Fake Job Detector",
+  "version": "1.0",
+  "description": "Detect suspicious job websites",
+
+  "permissions": [
+    "tabs"
+  ],
+
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
