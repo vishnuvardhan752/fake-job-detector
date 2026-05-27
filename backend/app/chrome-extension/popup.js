@@ -2,10 +2,6 @@ document.getElementById("checkBtn").addEventListener(
   "click",
   async () => {
 
-    const resultDiv = document.getElementById("result");
-
-    resultDiv.innerHTML = "Checking website...";
-
     const [tab] = await chrome.tabs.query({
       active: true,
       currentWindow: true
@@ -30,7 +26,7 @@ document.getElementById("checkBtn").addEventListener(
 
     const data = await response.json();
 
-    resultDiv.innerHTML = `
+    document.getElementById("result").innerHTML = `
       <h3>Status: ${data.status}</h3>
       <p>Risk Score: ${data.risk_score}</p>
       <p>Keywords: ${data.matched_keywords.join(", ")}</p>
